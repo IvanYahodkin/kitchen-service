@@ -28,9 +28,24 @@ class DishTypeListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "dish_type_list"
 
 
+class DishTypeDetailView(LoginRequiredMixin, generic.DetailView):
+    model = DishType
+    template_name = "kitchen/dish_type_detail.html"
+    context_object_name = "dish_type"
+    queryset = DishType.objects.prefetch_related("dishes")
+
+
 class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
 
 
+class CookDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Cook
+
+
 class DishListView(LoginRequiredMixin, generic.ListView):
+    model = Dish
+
+
+class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
