@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <ul>
-        <li><strong>Dish types:</strong> {{ num_dish_type }}</li>
-        <li><strong>Cooks:</strong> {{ num_cooks }}</li>
-        <li><strong>Dishes:</strong> {{ num_dishes }}</li>
-    </ul>
+  <p class="lead text-black mt-3">
+    Welcome to the Restaurant Kitchen Service
+  </p>
+  <ul>
+    <li><strong>Dish types:</strong> {{ num_dish_type }}</li>
+    <li><strong>Cooks:</strong> {{ num_cooks }}</li>
+    <li><strong>Dishes:</strong> {{ num_dishes }}</li>
+  </ul>
 {% endblock %}

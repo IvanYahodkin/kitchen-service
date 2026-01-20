@@ -7,6 +7,6 @@
   <p>Years of experience: {{ cook.years_of_experience }}</p>
   <p>All the cooks dishes:</p>
   {% for dish in cook.dishes.all %}
-    <p>{{ dish.name }}</p>
+    <p><a href="{% url 'kitchen:dish-detail' pk=dish.id %}">{{ dish.name }}</a></p>
   {% endfor %}
 {% endblock %}
