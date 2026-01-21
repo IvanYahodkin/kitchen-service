@@ -6,6 +6,11 @@
     <a href="{% url 'kitchen:dish-create' %}" class="btn btn-success">+ Add Dish</a>
   </div>
 
+  <form method="get" action="" class="form-inline mb-4">
+    {{ search_form }}
+    <input class="btn btn-secondary ml-2" type="submit" value="🔍">
+  </form>
+
   {% if dish_list %}
     <div class="card">
       <div class="table-responsive">

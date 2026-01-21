@@ -1,10 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
 
-from .models import Cook
+from .models import Cook, Dish
 
 
 class CookCreationForm(UserCreationForm):
@@ -18,3 +16,21 @@ class CookCreationForm(UserCreationForm):
         if years_of_experience <= 0:
             raise ValidationError("Please enter a positive integer")
         return years_of_experience
+
+
+class DishCreationForm(forms.ModelForm):
+    cooks = forms.ModelChoiceField(
+        queryset=Cook.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
+
+    class Meta:
+        model = Dish
+        fields = "__all__"
+
+
+class DishSearchForm(forms.Form):
+    name = forms.CharField(max_length=100,
+                           required=False,
+                           label="",
+                           widget=forms.TextInput(
+                               attrs={"placeholder": "Search by name"}))
