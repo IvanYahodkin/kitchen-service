@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <p class="lead text-black">
+  <p class="text-black">
     Welcome to the Restaurant Kitchen Service
+  </p>
+  <p class="visit-box">
+    <span>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}</span>
   </p>
   <ul>
     <li><strong>Dish types:</strong> {{ num_dish_type }}</li>
