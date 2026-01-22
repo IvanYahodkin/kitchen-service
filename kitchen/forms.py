@@ -9,7 +9,7 @@ class CookCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = Cook
-        fields = UserCreationForm.Meta.fields + ("years_of_experience",)
+        fields = UserCreationForm.Meta.fields + ("first_name", "last_name","years_of_experience",)
 
     def clean_years_of_experience(self):
         years_of_experience = self.cleaned_data["years_of_experience"]
@@ -19,7 +19,7 @@ class CookCreationForm(UserCreationForm):
 
 
 class DishCreationForm(forms.ModelForm):
-    cooks = forms.ModelChoiceField(
+    cooks = forms.ModelMultipleChoiceField(
         queryset=Cook.objects.all(),
         widget=forms.CheckboxSelectMultiple)
 
