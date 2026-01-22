@@ -6,3 +6,13 @@ body {
     float: right;
     margin: 0 2px 0 2px;
 }
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 200px;
+  height: 100%;
+  background: #f8f8f8;
+  padding: 20px;
+}

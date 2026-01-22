@@ -1,13 +1,38 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 
 {% block content %}
-  <br>
-  <h1>Dish: {{ dish.name }} </h1>
-  <p><strong>Price: </strong> {{ dish.price }}</p>
-  <p><strong>Dish Type: </strong>{{ dish.dish_type }}</p>
-  <p><strong>Description: </strong>{{ dish.description }}</p>
-  <p><strong>Cooks:</strong>
-  {% for cook in dish.cooks.all %}
-    {{ cook.username }}{% if not forloop.last %}, {% endif %}
-  {% endfor %}</p>
+<div class="container mt-7">
+
+  <div class="card shadow-sm w-50 mx-auto">
+    <div class="card-body">
+      <h3 class="card-title mb-3">Dish: <span class="text-primary fw-bold">{{ dish.name }}</span></h3>
+
+      <p class="mb-1"><strong>Price:</strong> ${{ dish.price }}</p>
+      <p class="mb-1"><strong>Dish Type:</strong> {{ dish.dish_type.name }}</p>
+      <p class="mb-3"><strong>Description:</strong> {{ dish.description }}</p>
+
+      <h5 class="mb-2">Cooks:</h5>
+      {% if dish.cooks.all %}
+        <ul class="list-group mb-3">
+          {% for cook in dish.cooks.all %}
+            <li class="list-group-item">
+              <a href="{% url 'kitchen:cook-detail' pk=cook.id %}" class="text-primary fw-bold text-decoration-none">
+                {{ cook.username }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="alert alert-info mb-3">
+          No cooks assigned to this dish.
+        </div>
+      {% endif %}
+
+      <a href="{% url 'kitchen:dish-type-detail' pk=dish.dish_type.id %}" class="btn btn-secondary">
+        Back to category
+      </a>
+    </div>
+  </div>
+
+</div>
 {% endblock %}
