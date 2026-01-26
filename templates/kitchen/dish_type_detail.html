@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-7">
+
+  <div class="card shadow-sm w-50 mx-auto">
+    <div class="card-body">
+      <h3 class="card-title mb-3">Dish Type: <span class="text-primary fw-bold">{{ dish_type.name }}</span></h3>
+
+      <h5 class="mb-2">Dishes in this category:</h5>
+      {% if dish_type.dishes.all %}
+        <ul class="list-group">
+          {% for dish in dish_type.dishes.all %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <a href="{% url 'kitchen:dish-detail' pk=dish.id %}" class="text-primary fw-bold text-decoration-none">
+                {{ dish.name }}
+              </a>
+              <span class="fw-bold">${{ dish.price }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="alert alert-info mt-2">
+          No dishes in this category yet.
+        </div>
+      {% endif %}
+
+      <a href="{% url 'kitchen:dish-type-list' %}" class="btn btn-secondary mt-3">Back to all categories</a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

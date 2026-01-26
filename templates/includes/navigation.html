@@ -1,0 +1,63 @@
+<div class="container position-sticky z-index-sticky top-0 ">
+  <div class="row">
+    <div class="col-12">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+        <div class="container-fluid ">
+          <a class="navbar-brand font-weight-bolder ms-sm-3" href="{% url 'kitchen:index' %}">Home</a>
+
+          <button class="navbar-toggler shadow-none ms-2" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#navigation"
+                  aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon mt-2 ">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </span>
+          </button>
+
+          <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 container-fluid" id="navigation">
+            <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100">
+
+              <!-- Pages directly in navbar -->
+              <li class="nav-item mx-2">
+                <a class="nav-link ps-2" href="{% url 'kitchen:dish-type-list' %}">All Dish Types</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link ps-2" href="{% url 'kitchen:cook-list' %}">All Cooks</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link ps-2" href="{% url 'kitchen:dish-list' %}">All Dishes</a>
+              </li>
+
+              <!-- Right side: Login/Logout -->
+              <li class="nav-item ms-lg-auto">
+                {% if user.is_authenticated %}
+                  <div class="d-flex align-items-center">
+                    <span class="username text-sm me-2 navbar-text d-flex ">{{ user.username }}</span>
+                    <form method="post" action="{% url 'logout' %}" class="d-inline">
+                      {% csrf_token %}
+                      <input type="hidden" name="next" value="{{ request.path }}">
+                      <button type="submit" class="nav-link nav-link-icon me-2 border-0 bg-transparent p-0" style="cursor: pointer;">
+                        <i class="fa fa-sign-out me-1"></i>
+
+                        <span class="d-inline text-sm z-index-1 font-weight-bold">Logout</span>
+                      </button>
+                    </form>
+                  </div>
+                {% else %}
+
+                  <a class="nav-link nav-link-icon me-2" href="{% url 'login' %}?next={{request.path}}">
+                    <i class="fa fa-sign-in me-1"></i>
+                    <span class="d-inline text-sm z-index-1 font-weight-bold">Login</span>
+                  </a>
+                {% endif %}
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

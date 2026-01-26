@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-7">
+
+  <!-- Header with title and button aligned to edges of table -->
+  <div class="d-flex justify-content-between w-50 mx-auto mb-3">
+    <h3 class="mb-0">Cooks</h3>
+    <a href="{% url 'kitchen:cook-create' %}" class="btn btn-success">
+      + ADD COOK
+    </a>
+  </div>
+
+  {% if cook_list %}
+    <div class="card shadow-sm w-50 mx-auto">
+      <div class="table-responsive">
+        <table class="table table-hover align-items-center mb-0">
+          <thead class="bg-light">
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">ID</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-end">Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for cook in cook_list %}
+            <tr>
+              <td class="ps-4 text-sm">{{ cook.id }}</td>
+              <td class="text-sm text-end">
+                <a href="{% url 'kitchen:cook-detail' pk=cook.id %}" class="text-primary fw-bold text-decoration-none">
+                  {{ cook.username }}
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-info mt-3 w-50 mx-auto text-center">
+      There are no cooks in the service.
+    </div>
+  {% endif %}
+
+</div>
+{% endblock content %}

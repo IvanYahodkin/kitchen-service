@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-7">
+
+  <div class="card shadow-sm w-50 mx-auto">
+    <div class="card-body">
+      <h3 class="card-title mb-3">Cook: <span class="text-primary fw-bold">{{ cook.username }}</span></h3>
+
+      <p class="mb-1"><strong>Name:</strong> {{ cook.first_name }} {{ cook.last_name }}</p>
+      <p class="mb-3"><strong>Years of experience:</strong> {{ cook.years_of_experience }}</p>
+
+      <h5 class="mb-2">All the cook's dishes:</h5>
+      {% if cook.dishes.exists %}
+        <ul class="list-group">
+          {% for dish in cook.dishes.all %}
+            <li class="list-group-item">
+              <a href="{% url 'kitchen:dish-detail' pk=dish.id %}" class="text-primary fw-bold text-decoration-none">
+                {{ dish.name }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="alert alert-info mt-2">
+          This cook has no dishes assigned.
+        </div>
+      {% endif %}
+
+      <!-- Button to return to cook list -->
+      <a href="{% url 'kitchen:cook-list' %}" class="btn btn-secondary mt-3">
+        Back to cooks
+      </a>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
